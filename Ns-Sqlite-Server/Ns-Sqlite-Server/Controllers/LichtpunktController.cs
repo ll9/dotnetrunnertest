@@ -97,6 +97,21 @@ namespace Ns_Sqlite_Server.Controllers
             return CreatedAtAction("GetLichtpunkt", new { id = lichtpunkt.Id }, lichtpunkt);
         }
 
+        // POST: api/Lichtpunkt
+        [HttpPost]
+        public async Task<IActionResult> PostLichtpunkt([FromBody] IEnumerable<Lichtpunkt> lichtpunkte)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Lichtpunkt.AddRange(lichtpunkte);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetLichtpunkt", new { ids = lichtpunkte.Select(lp => lp.Id) }, lichtpunkte);
+        }
+
         // DELETE: api/Lichtpunkt/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLichtpunkt([FromRoute] string id)
