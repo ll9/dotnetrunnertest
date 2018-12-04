@@ -98,7 +98,7 @@ namespace Ns_Sqlite_Server.Controllers
         }
 
         // POST: api/Lichtpunkt
-        [HttpPost]
+        [HttpPost("Batch")]
         public async Task<IActionResult> PostLichtpunkt([FromBody] IEnumerable<Lichtpunkt> lichtpunkte)
         {
             if (!ModelState.IsValid)
